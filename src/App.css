@@ -1,0 +1,747 @@
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: #2d3748;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #4CAF50 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Patrón de fondo inspirado en Minecraft */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(45deg, rgba(76, 175, 80, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(76, 175, 80, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(139, 195, 74, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(139, 195, 74, 0.1) 75%);
+  background-size: 60px 60px;
+  background-position: 0 0, 0 30px, 30px -30px, -30px 0px;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+/* Elementos flotantes de pistachos */
+.floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.pistachio-float,
+.minecraft-block {
+  position: absolute;
+  animation: float 6s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.pistachio-float {
+  width: 20px;
+  height: 12px;
+  background: linear-gradient(45deg, #8BC34A, #689F38);
+  border-radius: 8px 4px;
+  box-shadow: inset 2px 1px 0 rgba(255,255,255,0.3);
+}
+
+.minecraft-block {
+  width: 16px;
+  height: 16px;
+  background: #4CAF50;
+  box-shadow: 
+    inset 2px 2px 0 rgba(255,255,255,0.3),
+    inset -2px -2px 0 rgba(0,0,0,0.3);
+  image-rendering: pixelated;
+}
+
+.pistachio-float:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.pistachio-float:nth-child(2) { top: 20%; right: 15%; animation-delay: 1s; }
+.pistachio-float:nth-child(3) { top: 60%; left: 5%; animation-delay: 2s; }
+.pistachio-float:nth-child(4) { top: 80%; right: 10%; animation-delay: 3s; }
+
+.minecraft-block:nth-child(5) { top: 15%; right: 5%; animation-delay: 0.5s; }
+.minecraft-block:nth-child(6) { top: 40%; left: 8%; animation-delay: 1.5s; }
+.minecraft-block:nth-child(7) { top: 70%; right: 20%; animation-delay: 2.5s; }
+.minecraft-block:nth-child(8) { top: 90%; left: 15%; animation-delay: 3.5s; }
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header aesthetic mejorado */
+.header {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  padding: 4rem 3rem;
+  margin-bottom: 5rem;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
+  animation: slideInFromTop 1.2s ease-out;
+  border: 2px solid rgba(76, 175, 80, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '🎮';
+  position: absolute;
+  top: 20px;
+  left: 30px;
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.header::after {
+  content: '🥜';
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: bounce 2s ease-in-out infinite 1s;
+}
+
+.header h1 {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  background: linear-gradient(45deg, #4CAF50, #81C784, #A5D6A7, #66BB6A);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 4s ease-in-out infinite;
+  margin-bottom: 2rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.header h1::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #4CAF50, #8BC34A);
+  border-radius: 2px;
+  animation: expandContract 3s ease-in-out infinite;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #4a5568;
+  max-width: 900px;
+  margin: 0 auto;
+  line-height: 1.9;
+  text-align: justify;
+  font-weight: 400;
+  position: relative;
+  padding: 1.5rem;
+  background: rgba(76, 175, 80, 0.05);
+  border-radius: 16px;
+  border-left: 4px solid #4CAF50;
+}
+
+/* Elementos Minecraft aesthetic en galería */
+.galeria {
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+.galeria::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 80px;
+  background: #4CAF50;
+  box-shadow: 
+    inset 8px 8px 0 rgba(255,255,255,0.3),
+    inset -8px -8px 0 rgba(0,0,0,0.3);
+  image-rendering: pixelated;
+  animation: pixelRotate 4s linear infinite;
+}
+
+.galeria h2 {
+  text-align: center;
+  font-size: 2.8rem;
+  color: white;
+  margin-bottom: 4rem;
+  text-shadow: 
+    2px 2px 0 rgba(76, 175, 80, 0.8),
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+  animation: fadeInUp 1s ease-out 0.5s both;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  position: relative;
+  padding-top: 3rem;
+}
+
+.fotos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  padding: 2rem 0;
+}
+
+.foto-item {
+  opacity: 0;
+  transform: translateY(120px) scale(0.85);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border: 2px solid rgba(76, 175, 80, 0.3);
+  position: relative;
+}
+
+.foto-item::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(45deg, #8BC34A, #689F38);
+  border-radius: 12px 6px;
+  z-index: 2;
+  box-shadow: inset 2px 1px 0 rgba(255,255,255,0.4);
+  opacity: 0.8;
+}
+
+.foto-item.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: scaleUp 1s ease-out;
+}
+
+.foto-item img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+  transition: all 0.8s ease;
+  filter: brightness(0.95) contrast(1.1) saturate(1.1);
+}
+
+.foto-item:hover img {
+  transform: scale(1.08);
+  filter: brightness(1.05) contrast(1.2) saturate(1.2);
+}
+
+.foto-item:hover::before {
+  transform: rotate(360deg);
+  transition: transform 0.6s ease;
+}
+
+/* Sección de sentimientos aesthetic */
+.sentimiento {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(25px);
+  border-radius: 24px;
+  padding: 4rem 3rem;
+  margin-bottom: 4rem;
+  text-align: center;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.3);
+  animation: fadeInUp 1s ease-out 1s both;
+  border: 2px solid rgba(76, 175, 80, 0.2);
+  position: relative;
+}
+
+.sentimiento::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(45deg, #8BC34A, #689F38);
+  border-radius: 50%;
+  box-shadow: inset 4px 4px 0 rgba(255,255,255,0.3);
+}
+
+.sentimiento::after {
+  content: '💭';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.8rem;
+}
+
+.sentimiento h2 {
+  font-size: 2.4rem;
+  margin-bottom: 3rem;
+  color: #2d3748;
+  font-weight: 700;
+  background: linear-gradient(45deg, #4CAF50, #66BB6A);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.opciones-sentimiento {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.opciones-sentimiento label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  font-weight: 600;
+  border: 2px solid rgba(76, 175, 80, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.opciones-sentimiento label::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(76, 175, 80, 0.1), transparent);
+  transition: left 0.6s ease;
+}
+
+.opciones-sentimiento label:hover {
+  background: rgba(76, 175, 80, 0.1);
+  border-color: rgba(76, 175, 80, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(76, 175, 80, 0.2);
+}
+
+.opciones-sentimiento label:hover::before {
+  left: 100%;
+}
+
+.opciones-sentimiento input[type="radio"] {
+  accent-color: #4CAF50;
+  transform: scale(1.3);
+}
+
+.opciones-sentimiento input[type="radio"]:checked + span {
+  color: #4CAF50;
+  font-weight: 700;
+}
+
+.mensaje {
+  font-size: 1.3rem;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+  color: white;
+  border-radius: 20px;
+  margin-top: 2rem;
+  box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+  font-weight: 500;
+  line-height: 1.7;
+  position: relative;
+  overflow: hidden;
+}
+
+.mensaje::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transition: left 0.8s ease;
+}
+
+.mensaje.animado {
+  animation: fadeInScale 0.8s ease-out;
+}
+
+.mensaje.animado::before {
+  left: 100%;
+}
+
+/* Sección sorpresa con tema Minecraft */
+.sorpresa {
+  text-align: center;
+  padding: 3rem 0;
+  position: relative;
+}
+
+.sorpresa::before {
+  content: '🎮🥜';
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.sorpresa button {
+  background: linear-gradient(135deg, #4CAF50, #66BB6A, #81C784);
+  color: white;
+  border: none;
+  padding: 2rem 4rem;
+  font-size: 1.4rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  box-shadow: 
+    0 20px 40px rgba(76, 175, 80, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  animation: pulse 3s ease-in-out infinite;
+  margin-top: 2rem;
+}
+
+.sorpresa button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.sorpresa button:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 
+    0 25px 50px rgba(76, 175, 80, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.sorpresa button:hover::before {
+  left: 100%;
+}
+
+.sorpresa button:active {
+  transform: translateY(-4px) scale(1.02);
+}
+
+/* Keyframes mejorados */
+@keyframes scaleUp {
+  0% {
+    opacity: 0;
+    transform: translateY(120px) scale(0.85) rotateX(45deg);
+  }
+  60% {
+    opacity: 0.9;
+    transform: translateY(-30px) scale(1.05) rotateX(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes fadeAway {
+  0% {
+    opacity: 1;
+    transform: scale(1) rotateZ(0deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9) rotateZ(-3deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7) rotateZ(-8deg) translateY(-60px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+  75% {
+    transform: translateY(-30px) rotate(270deg);
+  }
+}
+
+@keyframes pixelRotate {
+  0% {
+    transform: translateX(-50%) rotateZ(0deg);
+  }
+  25% {
+    transform: translateX(-50%) rotateZ(90deg);
+  }
+  50% {
+    transform: translateX(-50%) rotateZ(180deg);
+  }
+  75% {
+    transform: translateX(-50%) rotateZ(270deg);
+  }
+  100% {
+    transform: translateX(-50%) rotateZ(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes slideInFromTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-120px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8) rotateX(45deg);
+  }
+  60% {
+    transform: scale(1.08) rotateX(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes expandContract {
+  0%, 100% {
+    width: 100px;
+    opacity: 0.8;
+  }
+  50% {
+    width: 140px;
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 
+      0 20px 40px rgba(76, 175, 80, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 
+      0 25px 50px rgba(76, 175, 80, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1.02);
+  }
+}
+
+/* Responsive Design mejorado */
+@media (max-width: 768px) {
+  .app {
+    padding: 1rem;
+  }
+  
+  .header {
+    padding: 3rem 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  .header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .header p {
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .galeria h2 {
+    font-size: 2.2rem;
+  }
+  
+  .foto-item img {
+    height: 320px;
+  }
+  
+  .sentimiento {
+    padding: 3rem 2rem;
+  }
+  
+  .opciones-sentimiento {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .mensaje {
+    font-size: 1.1rem;
+    padding: 2rem;
+  }
+  
+  .sorpresa button {
+    padding: 1.5rem 3rem;
+    font-size: 1.2rem;
+  }
+  
+  .floating-elements {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+  
+  .foto-item img {
+    height: 280px;
+  }
+  
+  .galeria h2 {
+    font-size: 2rem;
+  }
+  
+  .sentimiento h2 {
+    font-size: 2rem;
+  }
+  
+  .header::before,
+  .header::after {
+    font-size: 1.5rem;
+    top: 15px;
+  }
+}
+
+/* Mejoras para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .floating-elements {
+    display: none;
+  }
+}
+
+/* Indicadores de scroll mejorados */
+.foto-item::after {
+  content: '🎮';
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.4s ease;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.foto-item.active::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Elemento de carga personalizado */
+.loading-pistachio {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.loading-pistachio::before {
+  content: '🥜';
+  font-size: 3rem;
+  animation: bounce 1s ease-in-out infinite;
+}
