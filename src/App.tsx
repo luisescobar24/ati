@@ -107,7 +107,7 @@ const goToPanda = () => {
 
       {/* Galería con efecto de scroll cinematográfico */}
       <section className="galeria">
-        <h2>Momentos inolvidables 📸</h2>
+        <h2>Momentos que guardo en mi corazon 📸</h2>
         <div className="fotos-container">
           {[
             engriendote,
